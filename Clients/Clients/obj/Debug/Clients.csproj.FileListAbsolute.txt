@@ -1,0 +1,15 @@
+D:\github\PiRIS\Clients\Clients\bin\Debug\Clients.exe.config
+D:\github\PiRIS\Clients\Clients\bin\Debug\Clients.exe
+D:\github\PiRIS\Clients\Clients\bin\Debug\Clients.pdb
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.csprojAssemblyReference.cache
+D:\github\PiRIS\Clients\Clients\obj\Debug\MainWindow.g.cs
+D:\github\PiRIS\Clients\Clients\obj\Debug\App.g.cs
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients_MarkupCompile.cache
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients_MarkupCompile.lref
+D:\github\PiRIS\Clients\Clients\obj\Debug\MainWindow.baml
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.g.resources
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.Properties.Resources.resources
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.csproj.GenerateResource.cache
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.csproj.CoreCompileInputs.cache
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.exe
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.pdb
