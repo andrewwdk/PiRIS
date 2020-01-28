@@ -24,12 +24,12 @@ namespace Clients
         public MainWindow()
         {
             InitializeComponent();
-            SqlConnection connect = new SqlConnection();
-            connect.ConnectionString = @"data source = DESKTOP-76KUOA5\SQLEXPRESS;database = Clients;integrated security = SSPI";
-            SqlCommand cmd = new SqlCommand("select * from City", connect);
-            connect.Open();
-            SqlDataReader sqr = cmd.ExecuteReader();
-            connect.Close();
+            //SqlConnection connect = new SqlConnection();
+            //connect.ConnectionString = @"data source = DESKTOP-76KUOA5\SQLEXPRESS;database = Clients;integrated security = SSPI";
+            //SqlCommand cmd = new SqlCommand("select * from City", connect);
+            //connect.Open();
+            //SqlDataReader sqr = cmd.ExecuteReader();
+            //connect.Close();
         }
     }
 }

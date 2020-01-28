@@ -1,12 +1,67 @@
-﻿<Window x:Class="Clients.MainWindow"
+﻿<Window x:Name="AddUpdateDeleteClientWindow" x:Class="Clients.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clients"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Client Info" Height="490" Width="840">
     <Grid>
-        
+        <Label Content="Фамилия" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Имя" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Отчество" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Дата рождения" HorizontalAlignment="Left" Margin="25,130,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="SurnameTextbox" HorizontalAlignment="Left" Height="26" Margin="202,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="NameTextbox" HorizontalAlignment="Left" Height="26" Margin="202,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="PatronimicTextbox" HorizontalAlignment="Left" Height="26" Margin="202,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker x:Name="BirthDatePicker" HorizontalAlignment="Left" Margin="202,133,0,0" VerticalAlignment="Top" Height="26" Width="154"/>
+
+        <Label Content="Серия паспорта" HorizontalAlignment="Left" Margin="25,165,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Номер паспорта" HorizontalAlignment="Left" Margin="25,200,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Кем выдан" HorizontalAlignment="Left" Margin="25,235,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Дата выдачи" HorizontalAlignment="Left" Margin="25,270,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Идент. номер" HorizontalAlignment="Left" Margin="25,305,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="PassportSeriesTextbox" HorizontalAlignment="Left" Height="26" Margin="202,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="PassportNumberTextbox" HorizontalAlignment="Left" Height="26" Margin="202,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="AuthorityTextbox" HorizontalAlignment="Left" Height="26" Margin="202,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker x:Name="IssueDatePicker" HorizontalAlignment="Left" Margin="202,273,0,0" VerticalAlignment="Top" Height="26" Width="154"/>
+        <TextBox x:Name="IdentificationNumberTextbox" HorizontalAlignment="Left" Height="26" Margin="202,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Label Content="Место рождения" HorizontalAlignment="Left" Margin="25,340,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Город проживания" HorizontalAlignment="Left" Margin="25,375,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Адрес проживания" HorizontalAlignment="Left" Margin="25,410,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="PlaceOfBirthTextbox" HorizontalAlignment="Left" Height="26" Margin="202,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <ComboBox x:Name="LocationCombobox" HorizontalAlignment="Left" Margin="202,378,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
+        <TextBox x:Name="AddressTextbox" HorizontalAlignment="Left" Height="26" Margin="202,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Label Content="Телефон дом." HorizontalAlignment="Left" Margin="439,25,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Телефон моб." HorizontalAlignment="Left" Margin="439,60,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="E-mail" HorizontalAlignment="Left" Margin="439,95,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Место работы" HorizontalAlignment="Left" Margin="439,130,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Должность" HorizontalAlignment="Left" Margin="439,165,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="PhoneNumberTextbox" HorizontalAlignment="Left" Height="26" Margin="644,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="MobileNumberTextbox" HorizontalAlignment="Left" Height="26" Margin="644,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="EmailTextbox" HorizontalAlignment="Left" Height="26" Margin="644,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="JobTextbox" HorizontalAlignment="Left" Height="26" Margin="644,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="PositionTextbox" HorizontalAlignment="Left" Height="26" Margin="644,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Label Content="Адрес прописки" HorizontalAlignment="Left" Margin="439,200,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Семейное положение" HorizontalAlignment="Left" Margin="439,235,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Гражданство" HorizontalAlignment="Left" Margin="439,270,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Инвалидность" HorizontalAlignment="Left" Margin="439,305,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Пенсионер" HorizontalAlignment="Left" Margin="439,340,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Ежемесячный доход" HorizontalAlignment="Left" Margin="439,375,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="RegistrationAddressTextbox" HorizontalAlignment="Left" Height="26" Margin="644,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <ComboBox x:Name="MaritualStatusCombobox" HorizontalAlignment="Left" Margin="644,238,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
+        <ComboBox x:Name="NationalityCombobox" HorizontalAlignment="Left" Margin="644,273,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
+        <ComboBox x:Name="DisabilityCombobox" HorizontalAlignment="Left" Margin="644,308,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
+        <CheckBox x:Name="PensionerCheckbox" Content="" HorizontalAlignment="Left" Margin="714,347,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MonthlyIncomeTextbox" HorizontalAlignment="Left" Height="26" Margin="644,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Button x:Name="AddButton" Content="Добавить" HorizontalAlignment="Left" Margin="427,420,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="26"/>
+        <Button x:Name="SaveButton" Content="Сохранить" HorizontalAlignment="Left" Margin="507,420,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="26"/>
+        <Button x:Name="DeleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="587,420,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="26"/>
+        <Button x:Name="ListButton" Content="Список" HorizontalAlignment="Left" Margin="667,420,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="26"/>
+        <Button x:Name="ClearButton" Content="Очистить" HorizontalAlignment="Left" Margin="747,420,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="26"/>
     </Grid>
 </Window>
