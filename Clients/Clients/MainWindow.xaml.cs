@@ -21,15 +21,27 @@ namespace Clients
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ClientViewModel _client;
         public MainWindow()
         {
+            _client = new ClientViewModel();
+            this.DataContext = _client;
             InitializeComponent();
+            //PassportNumberMaskedTextbox.Mask = "0000000";
+            //PassportNumberMaskedTextbox.Value = "1111111";//"{Binding Path=MyClass.Value1, Mode=TwoWay}";
             //SqlConnection connect = new SqlConnection();
             //connect.ConnectionString = @"data source = DESKTOP-76KUOA5\SQLEXPRESS;database = Clients;integrated security = SSPI";
             //SqlCommand cmd = new SqlCommand("select * from City", connect);
             //connect.Open();
             //SqlDataReader sqr = cmd.ExecuteReader();
             //connect.Close();
+        }
+
+        public ClientViewModel Client { get { return _client; } }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
