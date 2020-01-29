@@ -27,21 +27,25 @@ namespace Clients
             _client = new ClientViewModel();
             this.DataContext = _client;
             InitializeComponent();
-            //PassportNumberMaskedTextbox.Mask = "0000000";
-            //PassportNumberMaskedTextbox.Value = "1111111";//"{Binding Path=MyClass.Value1, Mode=TwoWay}";
-            //SqlConnection connect = new SqlConnection();
-            //connect.ConnectionString = @"data source = DESKTOP-76KUOA5\SQLEXPRESS;database = Clients;integrated security = SSPI";
-            //SqlCommand cmd = new SqlCommand("select * from City", connect);
-            //connect.Open();
-            //SqlDataReader sqr = cmd.ExecuteReader();
-            //connect.Close();
+            Load();
         }
 
         public ClientViewModel Client { get { return _client; } }
 
+        private void Load()
+        {
+            using(ClientsEntities db = new ClientsEntities())
+            {
+                Client.Nationalities = db.Nationality.ToList<Nationality>();
+                Client.Cities = db.City.ToList<City>();
+                Client.Disabilities = db.Disability.ToList<Disability>();
+                Client.MaritualStatuses = db.MaritualStatus.ToList<MaritualStatus>();
+            }
+        }
+
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var a = Client.Surname;
         }
     }
 }

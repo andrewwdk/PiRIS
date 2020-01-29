@@ -12,34 +12,34 @@
         <Label Content="Имя" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Отчество" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Дата рождения" HorizontalAlignment="Left" Margin="25,130,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="SurnameTextbox" HorizontalAlignment="Left" Height="26" Margin="202,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="NameTextbox" HorizontalAlignment="Left" Height="26" Margin="202,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="PatronimicTextbox" HorizontalAlignment="Left" Height="26" Margin="202,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <DatePicker x:Name="BirthDatePicker" HorizontalAlignment="Left" Margin="202,133,0,0" VerticalAlignment="Top" Height="26" Width="154"/>
+        <TextBox x:Name="SurnameTextbox" HorizontalAlignment="Left" Height="26" Margin="202,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="NameTextbox" HorizontalAlignment="Left" Height="26" Margin="202,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="PatronimicTextbox" HorizontalAlignment="Left" Height="26" Margin="202,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Patronimic, UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker x:Name="BirthDatePicker" HorizontalAlignment="Left" Margin="202,133,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Серия паспорта" HorizontalAlignment="Left" Margin="25,165,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Номер паспорта" HorizontalAlignment="Left" Margin="25,200,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Кем выдан" HorizontalAlignment="Left" Margin="25,235,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Дата выдачи" HorizontalAlignment="Left" Margin="25,270,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Идент. номер" HorizontalAlignment="Left" Margin="25,305,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="PassportSeriesTextbox" HorizontalAlignment="Left" Height="26" Margin="202,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="AuthorityTextbox" HorizontalAlignment="Left" Height="26" Margin="202,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <DatePicker x:Name="IssueDatePicker" HorizontalAlignment="Left" Margin="202,273,0,0" VerticalAlignment="Top" Height="26" Width="154"/>
-        <xctk:MaskedTextBox x:Name="IdentificationNumberMaskedTextbox" HorizontalAlignment="Left" Height="26" Margin="202,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="PassportSeriesTextbox" HorizontalAlignment="Left" Height="26" Margin="202,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding PassportSeries, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="AuthorityTextbox" HorizontalAlignment="Left" Height="26" Margin="202,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Authority, UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker x:Name="IssueDatePicker" HorizontalAlignment="Left" Margin="202,273,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding IssueDate, UpdateSourceTrigger=PropertyChanged}"/>
+        <xctk:MaskedTextBox x:Name="IdentificationNumberMaskedTextbox" HorizontalAlignment="Left" Height="26" Margin="202,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Mask="0000000L000LL0" Text="{Binding IdentificationNumber, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Место рождения" HorizontalAlignment="Left" Margin="25,340,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Город проживания" HorizontalAlignment="Left" Margin="25,375,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Адрес проживания" HorizontalAlignment="Left" Margin="25,410,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="PlaceOfBirthTextbox" HorizontalAlignment="Left" Height="26" Margin="202,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <ComboBox x:Name="LocationCombobox" HorizontalAlignment="Left" Margin="202,378,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
-        <TextBox x:Name="AddressTextbox" HorizontalAlignment="Left" Height="26" Margin="202,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="PlaceOfBirthTextbox" HorizontalAlignment="Left" Height="26" Margin="202,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding PlaceOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="LocationCombobox" HorizontalAlignment="Left" Margin="202,378,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14" ItemsSource="{Binding Cities, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Location, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="AddressTextbox" HorizontalAlignment="Left" Height="26" Margin="202,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Телефон дом." HorizontalAlignment="Left" Margin="439,25,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Телефон моб." HorizontalAlignment="Left" Margin="439,60,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="E-mail" HorizontalAlignment="Left" Margin="439,95,0,0" VerticalAlignment="Top" FontSize="14"/>
         <xctk:MaskedTextBox x:Name="PhoneNumberMaskedTextbox" HorizontalAlignment="Left" Height="26" Margin="644,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <xctk:MaskedTextBox x:Name="MobileNumberMaskedTextbox" HorizontalAlignment="Left" Height="26" Margin="644,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="EmailTextbox" HorizontalAlignment="Left" Height="26" Margin="644,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <xctk:MaskedTextBox x:Name="MobileNumberMaskedTextbox" HorizontalAlignment="Left" Height="26" Margin="644,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Mask="+375 (00) 000-00-00" Text="{Binding MobileNumber, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="EmailTextbox" HorizontalAlignment="Left" Height="26" Margin="644,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Город прописки" HorizontalAlignment="Left" Margin="439,129,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Семейное положение" HorizontalAlignment="Left" Margin="439,164,0,0" VerticalAlignment="Top" FontSize="14"/>
@@ -47,11 +47,11 @@
         <Label Content="Инвалидность" HorizontalAlignment="Left" Margin="439,234,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Пенсионер" HorizontalAlignment="Left" Margin="439,269,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Ежемесячный доход" HorizontalAlignment="Left" Margin="439,304,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ComboBox x:Name="RegistrationCityTextbox" HorizontalAlignment="Left" Height="26" Margin="644,132,0,0" VerticalAlignment="Top" Width="154" FontSize="14" />
-        <ComboBox x:Name="MaritualStatusCombobox" HorizontalAlignment="Left" Margin="644,167,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
-        <ComboBox x:Name="NationalityCombobox" HorizontalAlignment="Left" Margin="644,202,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
-        <ComboBox x:Name="DisabilityCombobox" HorizontalAlignment="Left" Margin="644,237,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14"/>
-        <CheckBox x:Name="PensionerCheckbox" Content="" HorizontalAlignment="Left" Margin="714,276,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="RegistrationCityTextbox" HorizontalAlignment="Left" Height="26" Margin="644,132,0,0" VerticalAlignment="Top" Width="154" FontSize="14" ItemsSource="{Binding Cities, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding RegistrationCity, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="MaritualStatusCombobox" HorizontalAlignment="Left" Margin="644,167,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14" ItemsSource="{Binding MaritualStatuses, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Status" SelectedValuePath="Status" SelectedValue="{Binding MaritualStatus, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="NationalityCombobox" HorizontalAlignment="Left" Margin="644,202,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14" ItemsSource="{Binding Nationalities, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Country" SelectedValuePath="Country" SelectedValue="{Binding Nationality, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="DisabilityCombobox" HorizontalAlignment="Left" Margin="644,237,0,0" VerticalAlignment="Top" Width="154" Height="26" FontSize="14" ItemsSource="{Binding Disabilities, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Disability1" SelectedValuePath="Disability1" SelectedValue="{Binding Disability, UpdateSourceTrigger=PropertyChanged}"/>
+        <CheckBox x:Name="PensionerCheckbox" Content="" HorizontalAlignment="Left" Margin="714,276,0,0" VerticalAlignment="Top" IsChecked="{Binding Pensioner, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="MonthlyIncomeTextbox" HorizontalAlignment="Left" Height="26" Margin="644,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
         <Button x:Name="AddButton" Content="Добавить" HorizontalAlignment="Left" Margin="427,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40"/>
@@ -63,10 +63,10 @@
         <Label Content="Пол" HorizontalAlignment="Left" Margin="439,339,0,0" VerticalAlignment="Top" FontSize="14"/>
         <GroupBox x:Name="GenderGroupBox" HorizontalAlignment="Left" Height="37" Margin="626,342,0,0" VerticalAlignment="Top" Width="200">
             <Grid >
-                <RadioButton x:Name="MaleGenderRadioButton" Content="Мужской" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <RadioButton x:Name="FemaleGenderRadioButton"  Content="Женский" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="MaleGenderRadioButton" Content="Мужской" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="{Binding MaleGender, UpdateSourceTrigger=PropertyChanged}"/>
+                <RadioButton x:Name="FemaleGenderRadioButton"  Content="Женский" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" IsChecked="{Binding FemaleGender, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </GroupBox>
-        <xctk:MaskedTextBox x:Name="PassportNumberMaskedTextbox" Mask="0000000" Text="{Binding Value1, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="202,203,0,0" VerticalAlignment="Top" Width="154" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IncludeLiteralsInValue="False"/>
+        <xctk:MaskedTextBox x:Name="PassportNumberMaskedTextbox" Mask="0000000" Text="{Binding PassportNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="202,203,0,0" VerticalAlignment="Top" Width="154" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IncludeLiteralsInValue="False"/>
     </Grid>
 </Window>
