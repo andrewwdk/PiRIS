@@ -65,3 +65,10 @@ D:\github\PiRIS\Clients\Clients\bin\Debug\EntityFramework.xml
 D:\github\PiRIS\Clients\Clients\bin\Debug\EntityFramework.SqlServer.xml
 D:\github\PiRIS\Clients\Clients\bin\Debug\ru\EntityFramework.resources.dll
 D:\github\PiRIS\Clients\Clients\obj\Debug\Clients_Content.g.cs
+D:\projects\PiRIS\Clients\Clients\bin\Debug\EntityFramework.dll
+D:\projects\PiRIS\Clients\Clients\bin\Debug\EntityFramework.SqlServer.dll
+D:\projects\PiRIS\Clients\Clients\bin\Debug\EntityFramework.xml
+D:\projects\PiRIS\Clients\Clients\bin\Debug\EntityFramework.SqlServer.xml
+D:\projects\PiRIS\Clients\Clients\bin\Debug\ru\EntityFramework.resources.dll
+D:\projects\PiRIS\Clients\Clients\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+D:\projects\PiRIS\Clients\Clients\obj\Debug\Clients_Content.g.cs
