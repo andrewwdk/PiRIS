@@ -32,7 +32,7 @@ namespace Clients
         private string _nationality;
         private string _disability;
         private bool _pensioner;
-        private double _monthlyIncome;
+        private string _monthlyIncome;
         private List<City> _cities;
         private List<Disability> _disabilities;
         private List<MaritualStatus> _maritualStatuses;
@@ -324,13 +324,15 @@ namespace Clients
             }
         }
 
-        public double MonthlyIncome
+        public string MonthlyIncome
         {
             get { return _monthlyIncome; }
             set
             {
+
                 if (_monthlyIncome != value)
                 {
+
                     _monthlyIncome = value;
                     OnPropertyChanged("MonthlyIncome");
                 }

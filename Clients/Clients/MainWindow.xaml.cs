@@ -34,13 +34,13 @@ namespace Clients
 
         private void Load()
         {
-            //using(ClientsEntities db = new ClientsEntities())
-            //{
-            //    Client.Nationalities = db.Nationality.ToList<Nationality>();
-            //    Client.Cities = db.City.ToList<City>();
-            //    Client.Disabilities = db.Disability.ToList<Disability>();
-            //    Client.MaritualStatuses = db.MaritualStatus.ToList<MaritualStatus>();
-            //}
+            using (ClientsEntities db = new ClientsEntities())
+            {
+                Client.Nationalities = db.Nationality.ToList<Nationality>();
+                Client.Cities = db.City.ToList<City>();
+                Client.Disabilities = db.Disability.ToList<Disability>();
+                Client.MaritualStatuses = db.MaritualStatus.ToList<MaritualStatus>();
+            }
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -48,8 +48,21 @@ namespace Clients
             var a = Client.Surname;
             if (PhoneNumberMaskedTextbox.IsMaskCompleted)
             {
-                var t = true;
+                var t = MonthlyIncomeMaskedTextbox.IsMaskCompleted;
             }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsDataCorrect())
+            {
+                return;
+            }
+        }
+
+        private bool IsDataCorrect()
+        {
+            
         }
     }
 }
