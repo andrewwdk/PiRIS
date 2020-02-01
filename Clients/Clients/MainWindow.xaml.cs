@@ -95,7 +95,7 @@ namespace Clients
             client.Location = db.GetCityIDByValue(Client.Location);
             client.Address = Client.Address;
             client.MobileNumber = Client.MobileNumber;
-            client.PhoneNumber = Client.PhoneNumber.Replace("_", "");
+            client.PhoneNumber = Client.PhoneNumber?.Replace("_", "");
             client.Email = Client.Email;
             client.MaritalStatus = db.GetMaritualStatusIDByValue(Client.MaritualStatus);
             client.Disability = db.GetDisabilityIDByValue(Client.Disability);
@@ -124,6 +124,7 @@ namespace Clients
 
         private void ClearFields()
         {
+            Client.Id = 0;
             Client.Surname = null;
             Client.Name = null;
             Client.Patronimic = null;
@@ -328,6 +329,77 @@ namespace Clients
         {
             ListWindow listWindow = new ListWindow(Client);
             listWindow.Show();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(Client.Id == 0)
+            {
+                MessageBox.Show("Выберете клиента!");
+                return;
+            }
+
+            DataPreprocess();
+            if (!IsDataCorrect())
+            {
+                return;
+            }
+
+            UpdateClientInfo();
+            MessageBox.Show("Информация о клиенте успешно обновлена!");
+            ClearFields();
+        }
+
+        private void UpdateClientInfo()
+        {
+            using(var db = new ClientsEntities())
+            {
+                var client = db.GetClientById(Client.Id);
+
+                client.Surname = Client.Surname;
+                client.Name = Client.Name;
+                client.Patronimic = Client.Patronimic;
+                client.BirthDate = Client.BirthDate;
+                client.PassportSeries = Client.PassportSeries;
+                client.PassportNumber = Client.PassportNumber;
+                client.Authority = Client.Authority;
+                client.DateOfIssue = Client.IssueDate;
+                client.PlaceOfBirth = Client.PlaceOfBirth;
+                client.IdentificationNumber = Client.IdentificationNumber;
+                client.Location = db.GetCityIDByValue(Client.Location);
+                client.Address = Client.Address;
+                client.MobileNumber = Client.MobileNumber;
+                client.PhoneNumber = Client.PhoneNumber?.Replace("_", "");
+                client.Email = Client.Email;
+                client.MaritalStatus = db.GetMaritualStatusIDByValue(Client.MaritualStatus);
+                client.Disability = db.GetDisabilityIDByValue(Client.Disability);
+                client.Nationality = db.GetNationalityIDByValue(Client.Nationality);
+                client.Pensioner = Client.Pensioner;
+                client.RegistrationCity = db.GetCityIDByValue(Client.RegistrationCity);
+                client.Gender = (Client.MaleGender) ? true : false;
+                client.MonthlyIncome = ConvertStringToMoneyValue(Client.MonthlyIncome);
+
+                db.SaveChanges();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Client.Id == 0)
+            {
+                MessageBox.Show("Выберете клиента!");
+                return;
+            }
+
+            using(var db = new ClientsEntities())
+            {
+                var client = db.GetClientById(Client.Id);
+                db.Client.Remove(client);
+                db.SaveChanges();
+            }
+
+            MessageBox.Show("Информация о клиенте успешно удалена!");
+            ClearFields();
         }
     }
 }

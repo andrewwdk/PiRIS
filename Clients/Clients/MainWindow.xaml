@@ -55,8 +55,8 @@
         <xctk:MaskedTextBox x:Name="MonthlyIncomeMaskedTextbox" HorizontalAlignment="Left" Height="26" Margin="644,307,0,0" VerticalAlignment="Top" Width="154" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Mask="BYN   0#####\.##" Text="{Binding MonthlyIncome, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button x:Name="AddButton" Content="Добавить" HorizontalAlignment="Left" Margin="427,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="AddButton_Click"/>
-        <Button x:Name="SaveButton" Content="Сохранить" HorizontalAlignment="Left" Margin="507,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40"/>
-        <Button x:Name="DeleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="587,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40"/>
+        <Button x:Name="SaveButton" Content="Сохранить" HorizontalAlignment="Left" Margin="507,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="SaveButton_Click"/>
+        <Button x:Name="DeleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="587,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="DeleteButton_Click"/>
         <Button x:Name="ListButton" Content="Список" HorizontalAlignment="Left" Margin="667,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="ListButton_Click"/>
         <Button x:Name="ClearButton" Content="Очистить" HorizontalAlignment="Left" Margin="747,400,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="ClearButton_Click"/>
 
