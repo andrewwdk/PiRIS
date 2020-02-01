@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\projects\PiRIS\Clients\Clients\obj\Debug\
+D:\github\PiRIS\Clients\Clients\obj\Debug\
 Clients
 none
 false
 DEBUG;TRACE
-D:\projects\PiRIS\Clients\Clients\App.xaml
-11151548125
+D:\github\PiRIS\Clients\Clients\App.xaml
+21949894643
 2-506896003
-14655672708
-23566730374
-MainWindow.xaml;
+15100434220
+23-1332305597
+ListWindow.xaml;MainWindow.xaml;
 
 False
 

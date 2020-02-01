@@ -38,6 +38,8 @@ namespace Clients
         private List<MaritualStatus> _maritualStatuses;
         private List<Nationality> _nationalities;
 
+        public int Id { get; set; }
+
         public string Surname
         {
             get { return _surname; }

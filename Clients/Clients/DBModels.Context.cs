@@ -30,5 +30,122 @@ namespace Clients
         public virtual DbSet<Disability> Disability { get; set; }
         public virtual DbSet<MaritualStatus> MaritualStatus { get; set; }
         public virtual DbSet<Nationality> Nationality { get; set; }
+
+        public int GetCityIDByValue(string value)
+        {
+            foreach(var city in City)
+            {
+                if(city.Name == value)
+                {
+                    return city.CityID;
+                }
+            }
+
+            return -1;
+        }
+
+        public int GetDisabilityIDByValue(string value)
+        {
+            foreach (var disability in Disability)
+            {
+                if (disability.Disability1 == value)
+                {
+                    return disability.DisabilityID;
+                }
+            }
+
+            return -1;
+        }
+
+        public int GetMaritualStatusIDByValue(string value)
+        {
+            foreach (var status in MaritualStatus)
+            {
+                if (status.Status == value)
+                {
+                    return status.StatusID;
+                }
+            }
+
+            return -1;
+        }
+
+        public int GetNationalityIDByValue(string value)
+        {
+            foreach (var nationality in Nationality)
+            {
+                if (nationality.Country == value)
+                {
+                    return nationality.NationalityID;
+                }
+            }
+
+            return -1;
+        }
+
+        public Client GetClientById(int id)
+        {
+            foreach (var client in Client)
+            {
+                if (client.ClientID == id)
+                {
+                    return client;
+                }
+            }
+
+            return null;
+        }
+
+        public String GetCityById(int id)
+        {
+            foreach (var city in City)
+            {
+                if (city.CityID == id)
+                {
+                    return city.Name;
+                }
+            }
+
+            return null;
+        }
+
+        public String GetNationalityById(int id)
+        {
+            foreach (var nationality in Nationality)
+            {
+                if (nationality.NationalityID == id)
+                {
+                    return nationality.Country;
+                }
+            }
+
+            return null;
+        }
+
+        public String GetDisabilityById(int id)
+        {
+            foreach (var disability in Disability)
+            {
+                if (disability.DisabilityID == id)
+                {
+                    return disability.Disability1;
+                }
+            }
+
+            return null;
+        }
+
+        public String GetMaritualStatusById(int id)
+        {
+            foreach (var status in MaritualStatus)
+            {
+                if (status.StatusID == id)
+                {
+                    return status.Status;
+                }
+            }
+
+            return null;
+        }
     }
 }

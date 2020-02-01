@@ -72,3 +72,5 @@ D:\projects\PiRIS\Clients\Clients\bin\Debug\EntityFramework.SqlServer.xml
 D:\projects\PiRIS\Clients\Clients\bin\Debug\ru\EntityFramework.resources.dll
 D:\projects\PiRIS\Clients\Clients\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
 D:\projects\PiRIS\Clients\Clients\obj\Debug\Clients_Content.g.cs
+D:\github\PiRIS\Clients\Clients\obj\Debug\ListWindow.g.cs
+D:\github\PiRIS\Clients\Clients\obj\Debug\ListWindow.baml

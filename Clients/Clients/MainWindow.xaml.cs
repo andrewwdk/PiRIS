@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Clients
 {
@@ -30,11 +31,10 @@ namespace Clients
             Load();
         }
 
-        public ClientViewModel Client { get { return _client; } }
+        public ClientViewModel Client { get { return _client; } private set { _client = value; } }
 
         private void Load()
         {
-            Client.MobileNumber = "+375 (29) 655-65-73";
             using (ClientsEntities db = new ClientsEntities())
             {
                 Client.Nationalities = db.Nationality.ToList<Nationality>();
@@ -46,11 +46,7 @@ namespace Clients
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            var a = Client.Surname;
-            if (PhoneNumberMaskedTextbox.IsMaskCompleted)
-            {
-                var t = MonthlyIncomeMaskedTextbox.IsMaskCompleted;
-            }
+            ClearFields();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -60,6 +56,114 @@ namespace Clients
             {
                 return;
             }
+
+            if (IdentificationNumberExists())
+            {
+                MessageBox.Show("Клиент с таким идентификационным номером уже существует!");
+            }
+            else
+            {
+                AddClient();
+                MessageBox.Show("Клиент успешно добавлен!");
+                ClearFields();
+            }
+        }
+
+        private void AddClient()
+        {
+            using (ClientsEntities db = new ClientsEntities())
+            {
+                var client = new Client();
+                InitializeClientForDb(client, db);
+                db.Client.Add(client);
+                db.SaveChanges();
+            }
+        }
+
+        private void InitializeClientForDb(Client client, ClientsEntities db)
+        {
+            client.Surname = Client.Surname;
+            client.Name = Client.Name;
+            client.Patronimic = Client.Patronimic;
+            client.BirthDate = Client.BirthDate;
+            client.PassportSeries = Client.PassportSeries;
+            client.PassportNumber = Client.PassportNumber;
+            client.Authority = Client.Authority;
+            client.DateOfIssue = Client.IssueDate;
+            client.PlaceOfBirth = Client.PlaceOfBirth;
+            client.IdentificationNumber = Client.IdentificationNumber;
+            client.Location = db.GetCityIDByValue(Client.Location);
+            client.Address = Client.Address;
+            client.MobileNumber = Client.MobileNumber;
+            client.PhoneNumber = Client.PhoneNumber.Replace("_", "");
+            client.Email = Client.Email;
+            client.MaritalStatus = db.GetMaritualStatusIDByValue(Client.MaritualStatus);
+            client.Disability = db.GetDisabilityIDByValue(Client.Disability);
+            client.Nationality = db.GetNationalityIDByValue(Client.Nationality);
+            client.Pensioner = Client.Pensioner;
+            client.RegistrationCity = db.GetCityIDByValue(Client.RegistrationCity);
+            client.Gender = (Client.MaleGender) ? true : false;
+            client.MonthlyIncome = ConvertStringToMoneyValue(Client.MonthlyIncome);
+        }
+
+        private decimal? ConvertStringToMoneyValue(string value)
+        {
+            if(value == null)
+            {
+                return null;
+            }
+
+            var monthlyIncome = Client.MonthlyIncome.Substring(6).Replace("_", "");
+            if (monthlyIncome.EndsWith("."))
+            {
+                monthlyIncome = monthlyIncome.Replace(".", "");
+            }
+
+            return Convert.ToDecimal(monthlyIncome, new CultureInfo("en-US"));
+        }
+
+        private void ClearFields()
+        {
+            Client.Surname = null;
+            Client.Name = null;
+            Client.Patronimic = null;
+            Client.BirthDate = DateTime.MinValue;
+            Client.PassportSeries = null;
+            Client.PassportNumber = null;
+            Client.Authority = null;
+            Client.IssueDate = DateTime.MinValue;
+            Client.PlaceOfBirth = null;
+            Client.IdentificationNumber = null;
+            Client.Location = null;
+            Client.Address = null;
+            Client.MobileNumber = null;
+            Client.PhoneNumber = null;
+            Client.Email = null;
+            Client.MaritualStatus = null;
+            Client.Disability = null;
+            Client.Nationality = null;
+            Client.Pensioner = false;
+            Client.RegistrationCity = null;
+            Client.MaleGender = true;
+            Client.FemaleGender = false;
+            Client.MonthlyIncome = null;
+        }
+
+        private bool IdentificationNumberExists()
+        {
+            using (ClientsEntities db = new ClientsEntities())
+            {
+                var clients = db.Client.ToList<Client>();
+                foreach(var client in clients)
+                {
+                    if(client.IdentificationNumber == Client.IdentificationNumber)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private bool IsDataCorrect()
@@ -106,7 +210,7 @@ namespace Clients
                 return false;
             }
 
-            if (Client.Authority == null || Client.Authority == string.Empty || !Client.Authority.All(c => Char.IsLetter(c)))
+            if (Client.Authority == null || Client.Authority == string.Empty || !Client.Authority.All(c => Char.IsLetter(c) || c == ' '))
             {
                 MessageBox.Show("Укажите корректно, кем выдан паспорт клиента!");
                 return false;
@@ -142,13 +246,13 @@ namespace Clients
                 return false;
             }
 
-            if (!PhoneNumberMaskedTextbox.IsMaskCompleted && Client.PhoneNumber != null && Client.PhoneNumber != "80 (____) _______")
+            if (!PhoneNumberMaskedTextbox.IsMaskCompleted && Client.PhoneNumber != null)
             {
                 MessageBox.Show("Введите корректный домашний телефон клиента!");
                 return false;
             }
 
-            if (!MobileNumberMaskedTextbox.IsMaskCompleted && Client.MobileNumber != null && Client.MobileNumber != "+375 (__) ___-__-__")
+            if (!MobileNumberMaskedTextbox.IsMaskCompleted && Client.MobileNumber != null)
             {
                 MessageBox.Show("Введите корректный мобильный телефон клиента!");
                 return false;
@@ -178,6 +282,12 @@ namespace Clients
                 return false;
             }
 
+            if (!MonthlyIncomeMaskedTextbox.IsMaskCompleted && Client.MonthlyIncome != null)
+            {
+                MessageBox.Show("Введите корректный месячный доход клиента!");
+                return false;
+            }
+
             return true;
         }
 
@@ -191,6 +301,33 @@ namespace Clients
             Client.PlaceOfBirth = Client.PlaceOfBirth?.Trim();
             Client.Address = Client.Address?.Trim();
             Client.Email = Client.Email?.Trim();
+            Client.IdentificationNumber = Client.IdentificationNumber?.ToUpper();
+
+            if(Client.MonthlyIncome == "BYN   ______.__")
+            {
+                Client.MonthlyIncome = null;
+            }
+
+            if(Client.MobileNumber == "+375 (__) ___-__-__")
+            {
+                Client.MobileNumber = null;
+            }
+
+            if(Client.PhoneNumber == "80 (____) _______")
+            {
+                Client.PhoneNumber = null;
+            }
+
+            if(Client.Email == string.Empty)
+            {
+                Client.Email = null;
+            }
+        }
+
+        private void ListButton_Click(object sender, RoutedEventArgs e)
+        {
+            ListWindow listWindow = new ListWindow(Client);
+            listWindow.Show();
         }
     }
 }
