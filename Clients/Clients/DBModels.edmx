@@ -5,6 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище ClientsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="DepositTypeID" Type="int" Nullable="false" />
+          <Property Name="AccountNumber" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="MoneyAmount" Type="float" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="DaysCount" Type="int" Nullable="false" />
+          <Property Name="CurrencyID" Type="int" Nullable="false" />
+          <Property Name="PercentAccountID" Type="int" />
+        </EntityType>
+        <EntityType Name="BankResourse">
+          <Key>
+            <PropertyRef Name="ResourseID" />
+          </Key>
+          <Property Name="ResourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RealMoney" Type="float" Nullable="false" />
+          <Property Name="PhysicalMoney" Type="float" Nullable="false" />
+          <Property Name="CurrencyID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="CityID" />
@@ -40,6 +64,22 @@
           <Property Name="RegistrationCity" Type="int" Nullable="false" />
           <Property Name="Gender" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyID" />
+          </Key>
+          <Property Name="CurrencyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepositType">
+          <Key>
+            <PropertyRef Name="DepositTypeID" />
+          </Key>
+          <Property Name="DepositTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Percents" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="Disability">
           <Key>
             <PropertyRef Name="DisabilityID" />
@@ -61,6 +101,54 @@
           <Property Name="NationalityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Account_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_DepositType">
+          <End Role="DepositType" Type="Self.DepositType" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepositType">
+              <PropertyRef Name="DepositTypeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="DepositTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankResourse_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+          <End Role="BankResourse" Type="Self.BankResourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="BankResourse">
+              <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Client_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
@@ -122,11 +210,31 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище ClientsModelContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankResourse" EntityType="Self.BankResourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepositType" EntityType="Self.DepositType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disability" EntityType="Self.Disability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaritualStatus" EntityType="Self.MaritualStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nationality" EntityType="Self.Nationality" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_Client" Association="Self.FK_Account_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Currency" Association="Self.FK_Account_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_DepositType" Association="Self.FK_Account_DepositType">
+            <End Role="DepositType" EntitySet="DepositType" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankResourse_Currency" Association="Self.FK_BankResourse_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="BankResourse" EntitySet="BankResourse" />
+          </AssociationSet>
           <AssociationSet Name="FK_Client_City" Association="Self.FK_Client_City">
             <End Role="City" EntitySet="City" />
             <End Role="Client" EntitySet="Client" />
@@ -153,6 +261,34 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClientsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="DepositTypeID" Type="Int32" Nullable="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoneyAmount" Type="Double" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DaysCount" Type="Int32" Nullable="false" />
+          <Property Name="CurrencyID" Type="Int32" Nullable="false" />
+          <Property Name="PercentAccountID" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Account_Client" FromRole="Account" ToRole="Client" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_Account_Currency" FromRole="Account" ToRole="Currency" />
+          <NavigationProperty Name="DepositType" Relationship="Self.FK_Account_DepositType" FromRole="Account" ToRole="DepositType" />
+        </EntityType>
+        <EntityType Name="BankResourse">
+          <Key>
+            <PropertyRef Name="ResourseID" />
+          </Key>
+          <Property Name="ResourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RealMoney" Type="Double" Nullable="false" />
+          <Property Name="PhysicalMoney" Type="Double" Nullable="false" />
+          <Property Name="CurrencyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_BankResourse_Currency" FromRole="BankResourse" ToRole="Currency" />
+        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="CityID" />
@@ -189,11 +325,31 @@
           <Property Name="MonthlyIncome" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="RegistrationCity" Type="Int32" Nullable="false" />
           <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Account_Client" FromRole="Client" ToRole="Account" />
           <NavigationProperty Name="City" Relationship="Self.FK_Client_City" FromRole="Client" ToRole="City" />
           <NavigationProperty Name="City1" Relationship="Self.FK_Client_City1" FromRole="Client" ToRole="City" />
           <NavigationProperty Name="Disability1" Relationship="Self.FK_Client_Disability" FromRole="Client" ToRole="Disability" />
           <NavigationProperty Name="MaritualStatus" Relationship="Self.FK_Client_MaritualStatus" FromRole="Client" ToRole="MaritualStatus" />
           <NavigationProperty Name="Nationality1" Relationship="Self.FK_Client_Nationality" FromRole="Client" ToRole="Nationality" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyID" />
+          </Key>
+          <Property Name="CurrencyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Account_Currency" FromRole="Currency" ToRole="Account" />
+          <NavigationProperty Name="BankResourse" Relationship="Self.FK_BankResourse_Currency" FromRole="Currency" ToRole="BankResourse" />
+        </EntityType>
+        <EntityType Name="DepositType">
+          <Key>
+            <PropertyRef Name="DepositTypeID" />
+          </Key>
+          <Property Name="DepositTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Percents" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Account_DepositType" FromRole="DepositType" ToRole="Account" />
         </EntityType>
         <EntityType Name="Disability">
           <Key>
@@ -219,6 +375,54 @@
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Client_Nationality" FromRole="Nationality" ToRole="Client" />
         </EntityType>
+        <Association Name="FK_Account_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_DepositType">
+          <End Role="DepositType" Type="Self.DepositType" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepositType">
+              <PropertyRef Name="DepositTypeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="DepositTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankResourse_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+          <End Role="BankResourse" Type="Self.BankResourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="BankResourse">
+              <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Client_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
@@ -279,12 +483,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClientsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ClientsEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="BankResourse" EntityType="Self.BankResourse" />
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" />
+          <EntitySet Name="DepositType" EntityType="Self.DepositType" />
           <EntitySet Name="Disability" EntityType="Self.Disability" />
           <EntitySet Name="MaritualStatus" EntityType="Self.MaritualStatus" />
           <EntitySet Name="Nationality" EntityType="Self.Nationality" />
+          <AssociationSet Name="FK_Account_Client" Association="Self.FK_Account_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Currency" Association="Self.FK_Account_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_DepositType" Association="Self.FK_Account_DepositType">
+            <End Role="DepositType" EntitySet="DepositType" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankResourse_Currency" Association="Self.FK_BankResourse_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="BankResourse" EntitySet="BankResourse" />
+          </AssociationSet>
           <AssociationSet Name="FK_Client_City" Association="Self.FK_Client_City">
             <End Role="City" EntitySet="City" />
             <End Role="Client" EntitySet="Client" />
@@ -311,7 +535,33 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ClientsModelContainer" CdmEntityContainer="ClientsEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ClientsModelContainer" CdmEntityContainer="ClientsEntities1">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="ClientsModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="DepositTypeID" ColumnName="DepositTypeID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="MoneyAmount" ColumnName="MoneyAmount" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="DaysCount" ColumnName="DaysCount" />
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="PercentAccountID" ColumnName="PercentAccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankResourse">
+            <EntityTypeMapping TypeName="ClientsModel.BankResourse">
+              <MappingFragment StoreEntitySet="BankResourse">
+                <ScalarProperty Name="ResourseID" ColumnName="ResourseID" />
+                <ScalarProperty Name="RealMoney" ColumnName="RealMoney" />
+                <ScalarProperty Name="PhysicalMoney" ColumnName="PhysicalMoney" />
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="City">
             <EntityTypeMapping TypeName="ClientsModel.City">
               <MappingFragment StoreEntitySet="City">
@@ -346,6 +596,24 @@
                 <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
                 <ScalarProperty Name="RegistrationCity" ColumnName="RegistrationCity" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency">
+            <EntityTypeMapping TypeName="ClientsModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepositType">
+            <EntityTypeMapping TypeName="ClientsModel.DepositType">
+              <MappingFragment StoreEntitySet="DepositType">
+                <ScalarProperty Name="DepositTypeID" ColumnName="DepositTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Percents" ColumnName="Percents" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

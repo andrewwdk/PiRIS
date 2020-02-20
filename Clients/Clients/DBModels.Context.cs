@@ -25,17 +25,21 @@ namespace Clients
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Account> Account { get; set; }
+        public virtual DbSet<BankResourse> BankResourse { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Currency> Currency { get; set; }
+        public virtual DbSet<DepositType> DepositType { get; set; }
         public virtual DbSet<Disability> Disability { get; set; }
         public virtual DbSet<MaritualStatus> MaritualStatus { get; set; }
         public virtual DbSet<Nationality> Nationality { get; set; }
 
         public int GetCityIDByValue(string value)
         {
-            foreach(var city in City)
+            foreach (var city in City)
             {
-                if(city.Name == value)
+                if (city.Name == value)
                 {
                     return city.CityID;
                 }

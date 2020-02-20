@@ -14,6 +14,12 @@ namespace Clients
     
     public partial class Client
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Client()
+        {
+            this.Account = new HashSet<Account>();
+        }
+    
         public int ClientID { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
@@ -38,6 +44,8 @@ namespace Clients
         public int RegistrationCity { get; set; }
         public bool Gender { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Account { get; set; }
         public virtual City City { get; set; }
         public virtual City City1 { get; set; }
         public virtual Disability Disability1 { get; set; }
