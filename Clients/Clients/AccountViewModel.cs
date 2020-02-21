@@ -21,45 +21,68 @@ namespace Clients
         private string _daysCount;
         private string _percents;
         private string _currency;
+        private bool _isPercentage;
+        private string _percentMoney;
+
+        public AccountViewModel(Account account)
+        {
+            using (var db = new ClientsEntities())
+            {
+                var client = db.GetClientById(account.ClientID);
+                _surname = client?.Surname;
+                _name = client?.Name;
+                _patronimic = client?.Patronimic;
+                var depositType = db.GetDepositTypeById(account.DepositTypeID);
+                _depositType = depositType.Name;
+                _accountNumber = account.AccountNumber;
+                _moneyAmount = account.MoneyAmount.ToString();
+                _startDate = account.StartDate;
+                _endDate = account.EndDate;
+                _daysCount = account.DaysCount.ToString();
+                _percents = depositType.Percents.ToString();
+                _currency = db.GetCurrencyById(account.CurrencyID);
+                _isPercentage = account.PercentAccountID == null;
+                if (!_isPercentage)
+                {
+                    var percentAcc = db.GetAccountById(account.PercentAccountID.Value);
+                    _percentMoney = percentAcc.MoneyAmount.ToString();
+                }
+            } 
+        }
 
         public int Id { get; set; }
+
+        public string SNP
+        {
+            get
+            {
+                return _surname + " " + Char.ToUpper(_name[0]) + ". " + Char.ToUpper(_patronimic[0]) + ".";
+            }
+        }
+
+        public bool IsPercentage
+        {
+            get { return _isPercentage; }
+        }
+
+        public string PercentMoney
+        {
+            get { return _percentMoney; }
+        }
+
         public string Surname
         {
             get { return _surname; }
-            set
-            {
-                if (_surname != value)
-                {
-                    _surname = value;
-                    OnPropertyChanged("Surname");
-                }
-            }
         }
 
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged("Name");
-                }
-            }
         }
 
         public string Patronimic
         {
             get { return _patronimic; }
-            set
-            {
-                if (_patronimic != value)
-                {
-                    _patronimic = value;
-                    OnPropertyChanged("Patronimic");
-                }
-            }
         }
 
         public string DepositType

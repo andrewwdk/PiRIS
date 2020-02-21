@@ -151,5 +151,42 @@ namespace Clients
 
             return null;
         }
+        public DepositType GetDepositTypeById(int id)
+        {
+            foreach (var type in DepositType)
+            {
+                if (type.DepositTypeID == id)
+                {
+                    return type;
+                }
+            }
+
+            return null;
+        }
+        public String GetCurrencyById(int id)
+        {
+            foreach (var currency in Currency)
+            {
+                if (currency.CurrencyID == id)
+                {
+                    return currency.ShortName;
+                }
+            }
+
+            return null;
+        }
+
+        public Account GetAccountById(int id)
+        {
+            foreach (var acc in Account)
+            {
+                if (acc.AccountID == id)
+                {
+                    return acc;
+                }
+            }
+
+            return null;
+        }
     }
 }

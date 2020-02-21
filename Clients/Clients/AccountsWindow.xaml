@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="AccountList" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="AccountListDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Width="700" HorizontalAlignment="Left" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер счёта" Binding="{Binding AccountNumber}"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding SNP}"/>
+                <DataGridTextColumn Header="Баланс" Binding="{Binding MoneyAmount}"/>
+                <DataGridTextColumn Header="Валюта" Binding="{Binding Currency}"/>
+                <DataGridTemplateColumn Header="Доп. информация">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="selectButton" Content="Выбрать" Click="SelectButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

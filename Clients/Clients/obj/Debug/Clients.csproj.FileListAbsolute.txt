@@ -76,3 +76,7 @@ D:\github\PiRIS\Clients\Clients\obj\Debug\ListWindow.baml
 D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.csprojAssemblyReference.cache
 D:\github\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.baml
+D:\projects\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.g.cs
+D:\projects\PiRIS\Clients\Clients\obj\Debug\ListWindow.g.cs
+D:\projects\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.baml
+D:\projects\PiRIS\Clients\Clients\obj\Debug\ListWindow.baml
