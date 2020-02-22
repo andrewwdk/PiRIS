@@ -51,7 +51,8 @@ namespace Clients
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var newAccountWindow = new NewAccountWindow();
+            newAccountWindow.Show();
         }
     }
 }

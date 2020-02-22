@@ -82,3 +82,5 @@ D:\projects\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.baml
 D:\projects\PiRIS\Clients\Clients\obj\Debug\ListWindow.baml
 D:\github\PiRIS\Clients\Clients\obj\Debug\AccountInfoWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\AccountInfoWindow.baml
+D:\github\PiRIS\Clients\Clients\obj\Debug\NewAccountWindow.g.cs
+D:\github\PiRIS\Clients\Clients\obj\Debug\NewAccountWindow.baml

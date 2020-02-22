@@ -12,6 +12,7 @@ namespace Clients
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Linq;
     
     public partial class ClientsEntities : DbContext
     {
@@ -187,6 +188,11 @@ namespace Clients
             }
 
             return null;
+        }
+
+        public int GetUserAccountsCountById(int id)
+        {
+            return Account.Where(acc => acc.ClientID == id).ToList().Count();
         }
     }
 }

@@ -25,6 +25,8 @@ namespace Clients
         private string _percentMoney;
         private string _isClosed;
 
+        public AccountViewModel() { }
+
         public AccountViewModel(Account account)
         {
             using (var db = new ClientsEntities())
@@ -52,7 +54,7 @@ namespace Clients
             } 
         }
 
-        public int Id { get; set; }
+        public int ClientId { get; set; }
 
         public string SNP
         {
@@ -80,16 +82,40 @@ namespace Clients
         public string Surname
         {
             get { return _surname; }
+            set
+            {
+                if (_surname != value)
+                {
+                    _surname = value;
+                    OnPropertyChanged("Surname");
+                }
+            }
         }
 
         public string Name
         {
             get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
         }
 
         public string Patronimic
         {
             get { return _patronimic; }
+            set
+            {
+                if (_patronimic != value)
+                {
+                    _patronimic = value;
+                    OnPropertyChanged("Patronimic");
+                }
+            }
         }
 
         public string DepositType
@@ -108,6 +134,14 @@ namespace Clients
         public string AccountNumber
         {
             get { return _accountNumber; }
+            set
+            {
+                if (_accountNumber != value)
+                {
+                    _accountNumber = value;
+                    OnPropertyChanged("AccountNumber");
+                }
+            }
         }
 
         public string MoneyAmount
@@ -157,11 +191,27 @@ namespace Clients
         public string Percents
         {
             get { return _percents; }
+            set
+            {
+                if (_percents != value)
+                {
+                    _percents = value;
+                    OnPropertyChanged("Percents");
+                }
+            }
         }
 
         public string Currency
         {
             get { return _currency; }
+            set
+            {
+                if (_currency != value)
+                {
+                    _currency = value;
+                    OnPropertyChanged("Currency");
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

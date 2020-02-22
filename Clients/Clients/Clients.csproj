@@ -150,6 +150,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewAccountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MaritualStatus.cs">
@@ -157,6 +161,9 @@
     </Compile>
     <Compile Include="Nationality.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewAccountWindow.xaml.cs">
+      <DependentUpon>NewAccountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

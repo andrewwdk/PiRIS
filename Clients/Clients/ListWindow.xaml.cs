@@ -20,10 +20,18 @@ namespace Clients
     public partial class ListWindow : Window
     {
         private ClientViewModel _client;
+        private AccountViewModel _accountModel;
 
         public ListWindow(ClientViewModel client)
         {
             _client = client;
+            InitializeComponent();
+            Load();
+        }
+
+        public ListWindow(AccountViewModel account)
+        {
+            _accountModel = account;
             InitializeComponent();
             Load();
         }
@@ -61,30 +69,41 @@ namespace Clients
 
         private void InitializeClient(Client selectedClient, ClientsEntities db)
         {
-            _client.Id = selectedClient.ClientID;
-            _client.Surname = selectedClient.Surname;
-            _client.Name = selectedClient.Name;
-            _client.Patronimic = selectedClient.Patronimic;
-            _client.BirthDate = selectedClient.BirthDate;
-            _client.PassportSeries = selectedClient.PassportSeries;
-            _client.PassportNumber = selectedClient.PassportNumber;
-            _client.Authority = selectedClient.Authority;
-            _client.IssueDate = selectedClient.DateOfIssue;
-            _client.PlaceOfBirth = selectedClient.PlaceOfBirth;
-            _client.IdentificationNumber = selectedClient.IdentificationNumber;
-            _client.Location = db.GetCityById(selectedClient.Location);
-            _client.Address = selectedClient.Address;
-            _client.MobileNumber = selectedClient.MobileNumber;
-            _client.PhoneNumber = selectedClient.PhoneNumber == null ? null : FormatePhoneNumber(selectedClient.PhoneNumber);
-            _client.Email = selectedClient.Email;
-            _client.MaritualStatus = db.GetMaritualStatusById(selectedClient.MaritalStatus);
-            _client.Disability = db.GetDisabilityById(selectedClient.Disability);
-            _client.Nationality = db.GetNationalityById(selectedClient.Nationality);
-            _client.Pensioner = selectedClient.Pensioner;
-            _client.RegistrationCity = db.GetCityById(selectedClient.RegistrationCity);
-            _client.MaleGender = (selectedClient.Gender) ? true : false;
-            _client.FemaleGender = (selectedClient.Gender) ? false : true;
-            _client.MonthlyIncome = selectedClient.MonthlyIncome == null ? null : FormateMonthlyIncome(selectedClient.MonthlyIncome.ToString());
+            if (_client != null)
+            {
+                _client.Id = selectedClient.ClientID;
+                _client.Surname = selectedClient.Surname;
+                _client.Name = selectedClient.Name;
+                _client.Patronimic = selectedClient.Patronimic;
+                _client.BirthDate = selectedClient.BirthDate;
+                _client.PassportSeries = selectedClient.PassportSeries;
+                _client.PassportNumber = selectedClient.PassportNumber;
+                _client.Authority = selectedClient.Authority;
+                _client.IssueDate = selectedClient.DateOfIssue;
+                _client.PlaceOfBirth = selectedClient.PlaceOfBirth;
+                _client.IdentificationNumber = selectedClient.IdentificationNumber;
+                _client.Location = db.GetCityById(selectedClient.Location);
+                _client.Address = selectedClient.Address;
+                _client.MobileNumber = selectedClient.MobileNumber;
+                _client.PhoneNumber = selectedClient.PhoneNumber == null ? null : FormatePhoneNumber(selectedClient.PhoneNumber);
+                _client.Email = selectedClient.Email;
+                _client.MaritualStatus = db.GetMaritualStatusById(selectedClient.MaritalStatus);
+                _client.Disability = db.GetDisabilityById(selectedClient.Disability);
+                _client.Nationality = db.GetNationalityById(selectedClient.Nationality);
+                _client.Pensioner = selectedClient.Pensioner;
+                _client.RegistrationCity = db.GetCityById(selectedClient.RegistrationCity);
+                _client.MaleGender = (selectedClient.Gender) ? true : false;
+                _client.FemaleGender = (selectedClient.Gender) ? false : true;
+                _client.MonthlyIncome = selectedClient.MonthlyIncome == null ? null : FormateMonthlyIncome(selectedClient.MonthlyIncome.ToString());
+            }
+
+            if(_accountModel != null)
+            {
+                _accountModel.Surname = selectedClient.Surname;
+                _accountModel.Name = selectedClient.Name;
+                _accountModel.Patronimic = selectedClient.Patronimic;
+                _accountModel.ClientId = selectedClient.ClientID;
+            }
         }
 
         private string FormatePhoneNumber(string initialValue)

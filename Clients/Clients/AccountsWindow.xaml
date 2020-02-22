@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clients"
         mc:Ignorable="d"
-        Title="AccountList" Height="450" Width="840">
+        Title="AccountList" Height="450" Width="845">
     <Grid>
         <DataGrid x:Name="AccountListDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Width="700" HorizontalAlignment="Left" >
             <DataGrid.Columns>
@@ -22,6 +22,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="CreateButton" Content="Новый договор" FontSize="16" Click="CreateButton_Click" Width="120" Height="50" Margin="707,66,6.6,304"/>
+        <Button x:Name="CreateButton" Content="Новый договор" FontSize="15" Click="CreateButton_Click" Width="120" Height="50" Margin="707,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Window>
