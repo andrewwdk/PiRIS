@@ -36,9 +36,12 @@ namespace Clients
                     accountsModel.Add(new AccountViewModel(account));
                 }
 
-                AccountListDataGrid.ItemsSource = accountsModel.OrderBy(acc => acc.Surname)
-                    .ThenBy(acc => acc.Name)
-                    .ThenBy(acc => acc.Patronimic);
+                this.Dispatcher.Invoke(() =>
+                {
+                    AccountListDataGrid.ItemsSource = accountsModel.OrderBy(acc => acc.Surname)
+                         .ThenBy(acc => acc.Name)
+                         .ThenBy(acc => acc.Patronimic);
+                });
             }
         }
 
@@ -49,10 +52,18 @@ namespace Clients
             accountInfoWindow.Show();
         }
 
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        private async void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             var newAccountWindow = new NewAccountWindow();
             newAccountWindow.Show();
+            await Task.Run(() => RefreshList(newAccountWindow));
+        }
+
+        private void RefreshList(NewAccountWindow wnd)
+        {
+            while (wnd.Dispatcher.Invoke(() => { return wnd.IsLoaded; }))
+            { }
+            Load();
         }
     }
 }

@@ -5,18 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clients"
         mc:Ignorable="d"
-        Title="NewAccountWindow" Height="300" Width="600">
+        Title="NewAccountWindow" Height="300" Width="660">
     <Grid>
         <Button x:Name="SelectButton" Content="Выбрать клиента" FontSize="14" Click="SelectButton_Click" Width="120" Height="36" Margin="7,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="240,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Text="{Binding AccountNumber, Mode=OneWay}"/>
         <Label Content="Фамилия:" HorizontalAlignment="Left" Margin="25,50,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Имя:" HorizontalAlignment="Left" Margin="25,85,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Отчество:" HorizontalAlignment="Left" Margin="25,120,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBlock HorizontalAlignment="Left" Margin="120,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Surname,  Mode=TwoWay}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="120,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Name, Mode=OneWay}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="120,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Patronimic, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="130,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Surname,  Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="130,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Name, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="130,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Patronimic, Mode=OneWay}"/>
 
         <Label Content="Вид депозита:" HorizontalAlignment="Left" Margin="25,155,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Проценты:" HorizontalAlignment="Left" Margin="25,190,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox x:Name="DepositTypeComboBox" HorizontalAlignment="Left" Height="26"  Margin="130,159,0,0" VerticalAlignment="Top" Width="175" FontSize="14" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding DepositType, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="DepositTypeComboBox_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="130,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Percents, Mode=OneWay}"/>
+
+        <Label Content="Сумма вклада:" HorizontalAlignment="Left" Margin="330,50,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Валюта:" HorizontalAlignment="Left" Margin="330,85,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="450,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" FontSize="14" FontStretch="ExtraExpanded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding MoneyAmount, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="CurrencyComboBox" HorizontalAlignment="Left" Height="26"  Margin="450,87,0,0" VerticalAlignment="Top" Width="175" FontSize="14" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Currency, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Начало:" HorizontalAlignment="Left" Margin="330,120,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Конец:" HorizontalAlignment="Left" Margin="330,155,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <DatePicker HorizontalAlignment="Left" Margin="450,122,0,0" VerticalAlignment="Top" Height="26" Width="175" SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="450,157,0,0" VerticalAlignment="Top" Height="26" Width="175" SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button x:Name="CreateButton" Content="Создать счёт" FontSize="14" Click="CreateButton_Click" Width="120" Height="36" Margin="413,198,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Window>

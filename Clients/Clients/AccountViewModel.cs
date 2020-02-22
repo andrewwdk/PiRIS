@@ -44,7 +44,7 @@ namespace Clients
                 _daysCount = account.DaysCount.ToString();
                 _percents = depositType.Percents.ToString();
                 _currency = db.GetCurrencyById(account.CurrencyID);
-                _isPercentage = (account.PercentAccountID != null) ? "Да" : "Нет";
+                _isPercentage = (account.PercentAccountID == null) ? "Да" : "Нет";
                 if (account.PercentAccountID != null)
                 {
                     var percentAcc = db.GetAccountById(account.PercentAccountID.Value);
@@ -60,7 +60,14 @@ namespace Clients
         {
             get
             {
-                return _surname + " " + Char.ToUpper(_name[0]) + ". " + Char.ToUpper(_patronimic[0]) + ".";
+                if (_surname != null)
+                {
+                    return _surname + " " + Char.ToUpper(_name[0]) + ". " + Char.ToUpper(_patronimic[0]) + ".";
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 

@@ -164,6 +164,20 @@ namespace Clients
 
             return null;
         }
+
+        public DepositType GetDepositTypeByName(string name)
+        {
+            foreach (var type in DepositType)
+            {
+                if (type.Name.Trim() == name.Trim())
+                {
+                    return type;
+                }
+            }
+
+            return null;
+        }
+
         public String GetCurrencyById(int id)
         {
             foreach (var currency in Currency)
@@ -182,6 +196,32 @@ namespace Clients
             foreach (var acc in Account)
             {
                 if (acc.AccountID == id)
+                {
+                    return acc;
+                }
+            }
+
+            return null;
+        }
+
+        public Currency GetCurrencyByName(string name)
+        {
+            foreach (var cur in Currency)
+            {
+                if (cur.Name.Trim() == name.Trim())
+                {
+                    return cur;
+                }
+            }
+
+            return null;
+        }
+
+        public Account GetAccountByAccountNumber(string number)
+        {
+            foreach (var acc in Account)
+            {
+                if (acc.AccountNumber.Trim() == number)
                 {
                     return acc;
                 }

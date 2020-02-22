@@ -25,14 +25,15 @@ namespace Clients
             _accountModel = new AccountViewModel();
             this.DataContext = _accountModel;
             InitializeComponent();
+            DepositTypeComboBox.ItemsSource = GetDepositTypes();
+            CurrencyComboBox.ItemsSource = GetCurrencies();
         }
 
         private async void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             var clientListWindow = new ListWindow(_accountModel);
             clientListWindow.Show();
-            await Task.Run(() => GenerateAccountNumber(clientListWindow));
-            
+            await Task.Run(() => GenerateAccountNumber(clientListWindow)); 
         }
 
         private void GenerateAccountNumber(ListWindow wnd)
@@ -68,6 +69,125 @@ namespace Clients
                 result = result.Insert(0, "0");
             }
             return result;
+        }
+
+        private List<DepositType> GetDepositTypes()
+        {
+            List<DepositType> list = new List<DepositType>();
+
+            using (var db = new ClientsEntities())
+            {
+                foreach (var type in db.DepositType)
+                {
+                    list.Add(type);
+                }
+            }
+
+            return list;
+        }
+
+        private List<Currency> GetCurrencies()
+        {
+            List<Currency> list = new List<Currency>();
+
+            using (var db = new ClientsEntities())
+            {
+                foreach (var cur in db.Currency)
+                {
+                    list.Add(cur);
+                }
+            }
+
+            return list;
+        }
+
+        private void DepositTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            using (var db = new ClientsEntities())
+            {
+                _accountModel.Percents = db.GetDepositTypeByName(_accountModel.DepositType).Percents.ToString();
+            }
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsDataCorrect())
+            {
+                using (var db = new ClientsEntities())
+                {
+                    var mainAccount = new Account();
+                    var percentAccount = new Account();
+                    mainAccount.ClientID = _accountModel.ClientId;
+                    percentAccount.ClientID = _accountModel.ClientId;
+                    mainAccount.DepositTypeID = db.GetDepositTypeByName(_accountModel.DepositType).DepositTypeID;
+                    percentAccount.DepositTypeID = mainAccount.DepositTypeID;
+                    mainAccount.AccountNumber = _accountModel.AccountNumber;
+                    var part1 = _accountModel.AccountNumber.Substring(0, 9);
+                    var part2 = GetCorrectAccountCountPart(Convert.ToInt32(_accountModel.AccountNumber.Substring(9, 3)) + 1);
+                    var part3 = new Random().Next(0, 9);
+                    percentAccount.AccountNumber = part1 + part2 + part3;
+                    mainAccount.MoneyAmount = Convert.ToDouble(_accountModel.MoneyAmount);
+                    percentAccount.MoneyAmount = 0;
+                    mainAccount.StartDate = _accountModel.StartDate;
+                    percentAccount.StartDate = _accountModel.StartDate;
+                    mainAccount.EndDate = _accountModel.EndDate;
+                    percentAccount.EndDate = _accountModel.EndDate;
+                    mainAccount.DaysCount = 0;
+                    percentAccount.DaysCount = 0;
+                    mainAccount.CurrencyID = db.GetCurrencyByName(_accountModel.Currency).CurrencyID;
+                    percentAccount.CurrencyID = mainAccount.CurrencyID;
+                    mainAccount.IsClosed = false;
+                    percentAccount.IsClosed = false;
+                    db.Account.Add(percentAccount);
+                    db.SaveChanges();
+                    mainAccount.PercentAccountID = db.GetAccountByAccountNumber(percentAccount.AccountNumber).AccountID;
+                    db.Account.Add(mainAccount);
+                    db.SaveChanges();
+                    this.Close();
+                }
+            }
+        }
+
+        private bool IsDataCorrect()
+        {
+            if(_accountModel.Name == null || _accountModel.Name == string.Empty)
+            {
+                MessageBox.Show("Выберите клиента!");
+                return false;
+            }
+
+            if(_accountModel.DepositType == null)
+            {
+                MessageBox.Show("Выберите вид депозита!");
+                return false;
+            }
+
+            if (_accountModel.Currency == null)
+            {
+                MessageBox.Show("Выберите валюту!");
+                return false;
+            }
+
+            if(_accountModel.StartDate.Year < 2020)
+            {
+                MessageBox.Show("Выберите корректную дату открытия!");
+                return false;
+            }
+
+            if (_accountModel.EndDate.Year < 2020 || _accountModel.EndDate <= _accountModel.StartDate)
+            {
+                MessageBox.Show("Выберите корректную дату закрытия!");
+                return false;
+            }
+
+            float temp;
+            if (_accountModel.MoneyAmount == null || _accountModel.MoneyAmount == string.Empty || !float.TryParse(_accountModel.MoneyAmount, out temp))
+            {
+                MessageBox.Show("Введите корректную сумму вклада!");
+                return false;
+            }
+
+            return true;
         }
     }
 }
