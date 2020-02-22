@@ -24,6 +24,7 @@ namespace Clients
         public int DaysCount { get; set; }
         public int CurrencyID { get; set; }
         public Nullable<int> PercentAccountID { get; set; }
+        public bool IsClosed { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Currency Currency { get; set; }

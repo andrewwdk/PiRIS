@@ -19,8 +19,9 @@ namespace Clients
     /// </summary>
     public partial class AccountInfoWindow : Window
     {
-        public AccountInfoWindow()
+        public AccountInfoWindow(AccountViewModel account)
         {
+            this.DataContext = account;
             InitializeComponent();
         }
     }

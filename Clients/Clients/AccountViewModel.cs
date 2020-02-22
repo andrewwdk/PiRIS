@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Clients
 {
-    class AccountViewModel : INotifyPropertyChanged
+    public class AccountViewModel : INotifyPropertyChanged
     {
         private string _surname;
         private string _name;
@@ -21,8 +21,9 @@ namespace Clients
         private string _daysCount;
         private string _percents;
         private string _currency;
-        private bool _isPercentage;
+        private string _isPercentage;
         private string _percentMoney;
+        private string _isClosed;
 
         public AccountViewModel(Account account)
         {
@@ -41,12 +42,13 @@ namespace Clients
                 _daysCount = account.DaysCount.ToString();
                 _percents = depositType.Percents.ToString();
                 _currency = db.GetCurrencyById(account.CurrencyID);
-                _isPercentage = account.PercentAccountID == null;
-                if (!_isPercentage)
+                _isPercentage = (account.PercentAccountID != null) ? "Да" : "Нет";
+                if (account.PercentAccountID != null)
                 {
                     var percentAcc = db.GetAccountById(account.PercentAccountID.Value);
                     _percentMoney = percentAcc.MoneyAmount.ToString();
                 }
+                _isClosed = account.IsClosed ? "Да" : "Нет";
             } 
         }
 
@@ -60,7 +62,12 @@ namespace Clients
             }
         }
 
-        public bool IsPercentage
+        public string IsClosed
+        {
+            get { return _isClosed; }
+        }
+
+        public string IsPercentage
         {
             get { return _isPercentage; }
         }
@@ -101,14 +108,6 @@ namespace Clients
         public string AccountNumber
         {
             get { return _accountNumber; }
-            set
-            {
-                if (_accountNumber != value)
-                {
-                    _accountNumber = value;
-                    OnPropertyChanged("AccountNumber");
-                }
-            }
         }
 
         public string MoneyAmount
@@ -153,40 +152,16 @@ namespace Clients
         public string DaysCount
         {
             get { return _daysCount; }
-            set
-            {
-                if (_daysCount != value)
-                {
-                    _daysCount = value;
-                    OnPropertyChanged("DaysCount");
-                }
-            }
         }
 
         public string Percents
         {
             get { return _percents; }
-            set
-            {
-                if (_percents != value)
-                {
-                    _percents = value;
-                    OnPropertyChanged("Percents");
-                }
-            }
         }
 
         public string Currency
         {
             get { return _currency; }
-            set
-            {
-                if (_currency != value)
-                {
-                    _currency = value;
-                    OnPropertyChanged("Currency");
-                }
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

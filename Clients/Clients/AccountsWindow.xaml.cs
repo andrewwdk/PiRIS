@@ -19,11 +19,8 @@ namespace Clients
     /// </summary>
     public partial class AccountList : Window
     {
-        private AccountViewModel _account;
-
         public AccountList()
         {
-            
             InitializeComponent();
             Load();
         }
@@ -47,7 +44,13 @@ namespace Clients
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedAccountNumber = AccountListDataGrid.SelectedItem as AccountViewModel;
+            var selectedAccount = AccountListDataGrid.SelectedItem as AccountViewModel;
+            var accountInfoWindow = new AccountInfoWindow(selectedAccount);
+            accountInfoWindow.Show();
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

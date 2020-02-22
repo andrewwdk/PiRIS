@@ -5,8 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clients"
         mc:Ignorable="d"
-        Title="AccountInfoWindow" Height="300" Width="500">
+        Title="AccountInfoWindow" Height="300" Width="600">
     <Grid>
-        
+        <TextBlock HorizontalAlignment="Left" Margin="240,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Text="{Binding AccountNumber, Mode=OneWay}"/>
+        <Label Content="Фамилия:" HorizontalAlignment="Left" Margin="25,50,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Имя:" HorizontalAlignment="Left" Margin="25,85,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Отчество:" HorizontalAlignment="Left" Margin="25,120,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="120,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Surname, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="120,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Name, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="120,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Patronimic, Mode=OneWay}"/>
+
+        <Label Content="Вид:" HorizontalAlignment="Left" Margin="25,155,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Процентный:" HorizontalAlignment="Left" Margin="25,190,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Статус:" HorizontalAlignment="Left" Margin="25,225,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="120,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding DepositType, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="120,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding IsPercentage, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="120,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding IsClosed, Mode=OneWay}"/>
+
+        <Label Content="Баланс:" HorizontalAlignment="Left" Margin="320,50,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Валюта:" HorizontalAlignment="Left" Margin="320,85,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Проценты:" HorizontalAlignment="Left" Margin="320,120,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="415,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding MoneyAmount, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="415,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Currency, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="415,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding ProcentMoney, Mode=OneWay}"/>
+
+        <Label Content="Кол-во дней:" HorizontalAlignment="Left" Margin="320,155,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Начало:" HorizontalAlignment="Left" Margin="320,190,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Конец:" HorizontalAlignment="Left" Margin="320,225,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="415,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding DaysCount, Mode=OneWay}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="415,194,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding StartDate, Mode=OneWay}" IsEnabled="False"/>
+        <DatePicker HorizontalAlignment="Left" Margin="415,229,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding EndDate, Mode=OneWay}" IsEnabled="False"/>
     </Grid>
 </Window>

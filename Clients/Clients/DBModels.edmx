@@ -19,6 +19,7 @@
           <Property Name="DaysCount" Type="int" Nullable="false" />
           <Property Name="CurrencyID" Type="int" Nullable="false" />
           <Property Name="PercentAccountID" Type="int" />
+          <Property Name="IsClosed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="BankResourse">
           <Key>
@@ -275,6 +276,7 @@
           <Property Name="DaysCount" Type="Int32" Nullable="false" />
           <Property Name="CurrencyID" Type="Int32" Nullable="false" />
           <Property Name="PercentAccountID" Type="Int32" />
+          <Property Name="IsClosed" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Account_Client" FromRole="Account" ToRole="Client" />
           <NavigationProperty Name="Currency" Relationship="Self.FK_Account_Currency" FromRole="Account" ToRole="Currency" />
           <NavigationProperty Name="DepositType" Relationship="Self.FK_Account_DepositType" FromRole="Account" ToRole="DepositType" />
@@ -483,7 +485,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClientsEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ClientsEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Account" EntityType="Self.Account" />
           <EntitySet Name="BankResourse" EntityType="Self.BankResourse" />
           <EntitySet Name="City" EntityType="Self.City" />
@@ -535,7 +537,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ClientsModelContainer" CdmEntityContainer="ClientsEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ClientsModelContainer" CdmEntityContainer="ClientsEntities2">
           <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="ClientsModel.Account">
               <MappingFragment StoreEntitySet="Account">
@@ -549,6 +551,7 @@
                 <ScalarProperty Name="DaysCount" ColumnName="DaysCount" />
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="PercentAccountID" ColumnName="PercentAccountID" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
