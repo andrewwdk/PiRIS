@@ -27,7 +27,7 @@
         <Label Content="Проценты:" HorizontalAlignment="Left" Margin="320,120,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBlock HorizontalAlignment="Left" Margin="415,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding MoneyAmount, Mode=OneWay}"/>
         <TextBlock HorizontalAlignment="Left" Margin="415,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Currency, Mode=OneWay}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="415,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding ProcentMoney, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="415,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding Percents, Mode=OneWay}"/>
 
         <Label Content="Кол-во дней:" HorizontalAlignment="Left" Margin="320,155,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Начало:" HorizontalAlignment="Left" Margin="320,190,0,0" VerticalAlignment="Top" FontSize="14"/>
@@ -35,5 +35,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="415,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="{Binding DaysCount, Mode=OneWay}"/>
         <DatePicker HorizontalAlignment="Left" Margin="415,194,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding StartDate, Mode=OneWay}" IsEnabled="False"/>
         <DatePicker HorizontalAlignment="Left" Margin="415,229,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding EndDate, Mode=OneWay}" IsEnabled="False"/>
+        <Button x:Name="CloseButton" Content="Закрыть" HorizontalAlignment="Left" Margin="503,5,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="CloseButton_Click"/>
     </Grid>
 </Window>

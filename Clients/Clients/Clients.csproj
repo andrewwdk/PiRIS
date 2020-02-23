@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BankMoneyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BankMoneyViewModel.cs" />
+    <Compile Include="BankMoneyWindow.xaml.cs">
+      <DependentUpon>BankMoneyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BankResourse.cs">
       <DependentUpon>DBModels.tt</DependentUpon>

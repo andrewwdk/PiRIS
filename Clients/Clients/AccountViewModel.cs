@@ -50,7 +50,7 @@ namespace Clients
                     var percentAcc = db.GetAccountById(account.PercentAccountID.Value);
                     _percentMoney = percentAcc.MoneyAmount.ToString();
                 }
-                _isClosed = account.IsClosed ? "Да" : "Нет";
+                _isClosed = account.IsClosed ? "Закрыт" : "Открыт";
             } 
         }
 

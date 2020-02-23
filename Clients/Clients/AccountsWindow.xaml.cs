@@ -47,9 +47,13 @@ namespace Clients
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedAccount = AccountListDataGrid.SelectedItem as AccountViewModel;
-            var accountInfoWindow = new AccountInfoWindow(selectedAccount);
-            accountInfoWindow.Show();
+            using (var db = new ClientsEntities())
+            {
+                var selectedAccount = AccountListDataGrid.SelectedItem as AccountViewModel;
+                var acc = db.GetAccountByAccountNumber(selectedAccount.AccountNumber);
+                var accountInfoWindow = new AccountInfoWindow(new AccountViewModel(acc));
+                accountInfoWindow.Show();
+            }
         }
 
         private async void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -64,6 +68,87 @@ namespace Clients
             while (wnd.Dispatcher.Invoke(() => { return wnd.IsLoaded; }))
             { }
             Load();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            using(var db = new ClientsEntities())
+            {
+                var mainAccounts = db.Account.Where(a => !a.IsClosed && a.PercentAccountID != null).ToList();
+                IncrimentDaysCount(db, mainAccounts);
+                CalculatePercents(db, mainAccounts);
+                EndOfMonthPayments(db, mainAccounts.Where(a => a.DepositTypeID == 1).ToList());
+                EndOfTermPayments(db, mainAccounts);
+            }
+            Load();
+        }
+
+        private void IncrimentDaysCount(ClientsEntities db, List<Account> list)
+        {
+            foreach(var acc in list)
+            {
+                acc.DaysCount++;
+                db.GetAccountById(acc.PercentAccountID.Value).DaysCount++;
+            }
+            db.SaveChanges();  
+        }
+
+        private void CalculatePercents(ClientsEntities db, List<Account> list)
+        {
+            foreach (var acc in list)
+            {
+                var percents = (db.GetDepositTypeById(acc.DepositTypeID).Percents * acc.MoneyAmount)/ (100 * 365);
+                db.GetAccountById(acc.PercentAccountID.Value).MoneyAmount += Math.Round(percents, 4);
+            }
+            db.SaveChanges();
+        }
+
+        private void EndOfMonthPayments(ClientsEntities db, List<Account> list)
+        {
+            foreach (var acc in list)
+            {
+                if (acc.DaysCount % 30 == 0)
+                {
+                    var percentAccount = db.GetAccountById(acc.PercentAccountID.Value);
+                    acc.MoneyAmount += percentAccount.MoneyAmount;
+                    var bankResources = db.BankResourse.ToList();
+                    bankResources[0].RealMoney -= ConvertCurrencyToByn(acc.CurrencyID) * percentAccount.MoneyAmount;
+                    percentAccount.MoneyAmount = 0;
+                }
+            }
+            db.SaveChanges();
+        }
+
+        private void EndOfTermPayments(ClientsEntities db, List<Account> list)
+        {
+            foreach (var acc in list)
+            {
+                if ((acc.EndDate - acc.StartDate).Days + 1 == acc.DaysCount)
+                {
+                    var percentAccount = db.GetAccountById(acc.PercentAccountID.Value);
+                    percentAccount.IsClosed = true;
+                    acc.IsClosed = true;
+                    acc.MoneyAmount += percentAccount.MoneyAmount;
+                    var bankResources = db.BankResourse.ToList();
+                    bankResources[0].RealMoney -= ConvertCurrencyToByn(acc.CurrencyID) * percentAccount.MoneyAmount;
+                    percentAccount.MoneyAmount = 0;
+                }
+            }
+            db.SaveChanges();
+        }
+
+        private double ConvertCurrencyToByn(int id)
+        {
+            if (id == 2) return 2.2;
+            if (id == 3) return 2.4;
+
+            return 1;
+        }
+
+        private void BankMoneyButton_Click(object sender, RoutedEventArgs e)
+        {
+            var bankMoneyWindow = new BankMoneyWindow();
+            bankMoneyWindow.Show();
         }
     }
 }

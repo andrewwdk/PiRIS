@@ -142,10 +142,20 @@ namespace Clients
                     db.SaveChanges();
                     mainAccount.PercentAccountID = db.GetAccountByAccountNumber(percentAccount.AccountNumber).AccountID;
                     db.Account.Add(mainAccount);
+                    var bankResources = db.BankResourse.ToList();
+                    bankResources[0].PhysicalMoney += ConvertCurrencyToByn(mainAccount.CurrencyID) * mainAccount.MoneyAmount;
                     db.SaveChanges();
                     this.Close();
                 }
             }
+        }
+
+        private double ConvertCurrencyToByn(int id)
+        {
+            if (id == 2) return 2.2;
+            if (id == 3) return 2.4;
+
+            return 1;
         }
 
         private bool IsDataCorrect()

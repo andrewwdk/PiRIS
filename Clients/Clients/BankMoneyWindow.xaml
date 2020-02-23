@@ -1,0 +1,15 @@
+﻿<Window x:Class="Clients.BankMoneyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Clients"
+        mc:Ignorable="d"
+        Title="BankMoneyWindow" Height="300" Width="400">
+    <Grid>
+        <Label Content="Реальные деньги" HorizontalAlignment="Left" Margin="120,30,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Физические деньги" HorizontalAlignment="Left" Margin="110,140,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="100,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Text="{Binding RealMoney, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="120,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Text="{Binding PhysicalMoney, Mode=OneWay}"/>
+    </Grid>
+</Window>

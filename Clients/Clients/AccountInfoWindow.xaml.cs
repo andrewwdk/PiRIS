@@ -19,10 +19,29 @@ namespace Clients
     /// </summary>
     public partial class AccountInfoWindow : Window
     {
+        private AccountViewModel _account;
         public AccountInfoWindow(AccountViewModel account)
         {
+            _account = account;
             this.DataContext = account;
             InitializeComponent();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ClientsEntities())
+            {
+                var mainAcc = db.GetAccountByAccountNumber(_account.AccountNumber);
+                mainAcc.IsClosed = true;
+                if (mainAcc.PercentAccountID.HasValue)
+                {
+                    var percentAcc = db.GetAccountById(mainAcc.PercentAccountID.Value);
+                    percentAcc.MoneyAmount = 0;
+                    percentAcc.IsClosed = true;
+                }
+                db.SaveChanges();
+                this.Close();
+            }
         }
     }
 }
