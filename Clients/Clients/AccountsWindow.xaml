@@ -25,5 +25,6 @@
         <Button x:Name="CreateButton" Content="Новый договор" FontSize="15" Click="CreateButton_Click" Width="120" Height="50" Margin="707,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="CloseButton" Content="Зыкрыть день" FontSize="15" Click="CloseButton_Click" Width="120" Height="50" Margin="707,154,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="BankMoneyButton" Content="Счёт банка" FontSize="15" Click="BankMoneyButton_Click" Width="120" Height="50" Margin="707,218,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="ClientsButton" Content="Клиенты" FontSize="15" Click="ClientsButton_Click" Width="120" Height="50" Margin="707,278,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Window>

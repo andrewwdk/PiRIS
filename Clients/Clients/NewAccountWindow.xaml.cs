@@ -127,7 +127,14 @@ namespace Clients
                     var part3 = new Random().Next(0, 9);
                     percentAccount.AccountNumber = part1 + part2 + part3;
                     mainAccount.MoneyAmount = Convert.ToDouble(_accountModel.MoneyAmount);
-                    percentAccount.MoneyAmount = 0;
+                    if (mainAccount.DepositTypeID == 3 || mainAccount.DepositTypeID == 4)
+                    {
+                        percentAccount.MoneyAmount = Math.Round(mainAccount.MoneyAmount * Convert.ToDouble(_accountModel.Percents) / 100, 2);
+                    }
+                    else
+                    {
+                        percentAccount.MoneyAmount = 0;
+                    }
                     mainAccount.StartDate = _accountModel.StartDate;
                     percentAccount.StartDate = _accountModel.StartDate;
                     mainAccount.EndDate = _accountModel.EndDate;
@@ -143,7 +150,14 @@ namespace Clients
                     mainAccount.PercentAccountID = db.GetAccountByAccountNumber(percentAccount.AccountNumber).AccountID;
                     db.Account.Add(mainAccount);
                     var bankResources = db.BankResourse.ToList();
-                    bankResources[0].PhysicalMoney += ConvertCurrencyToByn(mainAccount.CurrencyID) * mainAccount.MoneyAmount;
+                    if (mainAccount.DepositTypeID == 3 || mainAccount.DepositTypeID == 4)
+                    {
+                        bankResources[0].PhysicalMoney -= ConvertCurrencyToByn(mainAccount.CurrencyID) * mainAccount.MoneyAmount;
+                    }
+                    else
+                    {
+                        bankResources[0].PhysicalMoney += ConvertCurrencyToByn(mainAccount.CurrencyID) * mainAccount.MoneyAmount;
+                    }
                     db.SaveChanges();
                     this.Close();
                 }

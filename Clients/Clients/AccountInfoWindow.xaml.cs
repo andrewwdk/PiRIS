@@ -25,6 +25,14 @@ namespace Clients
             _account = account;
             this.DataContext = account;
             InitializeComponent();
+            using(var db = new ClientsEntities())
+            {
+                var depositTypeID = db.GetDepositTypeByName(_account.DepositType).DepositTypeID;
+                if((depositTypeID == 3 || depositTypeID == 4) && _account.IsPercentage == "Нет")
+                {
+                    PaymentsButton.IsEnabled = true;
+                }
+            }
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -42,6 +50,12 @@ namespace Clients
                 db.SaveChanges();
                 this.Close();
             }
+        }
+
+        private void PaymentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            CreditPaymentsWindow creditWindow = new CreditPaymentsWindow(_account);
+            creditWindow.Show();
         }
     }
 }

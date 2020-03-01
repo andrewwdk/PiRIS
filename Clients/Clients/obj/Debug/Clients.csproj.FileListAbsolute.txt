@@ -86,3 +86,5 @@ D:\github\PiRIS\Clients\Clients\obj\Debug\NewAccountWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\NewAccountWindow.baml
 D:\github\PiRIS\Clients\Clients\obj\Debug\BankMoneyWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\BankMoneyWindow.baml
+D:\github\PiRIS\Clients\Clients\obj\Debug\CreditPaymentsWindow.g.cs
+D:\github\PiRIS\Clients\Clients\obj\Debug\CreditPaymentsWindow.baml

@@ -36,5 +36,6 @@
         <DatePicker HorizontalAlignment="Left" Margin="415,194,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding StartDate, Mode=OneWay}" IsEnabled="False"/>
         <DatePicker HorizontalAlignment="Left" Margin="415,229,0,0" VerticalAlignment="Top" Height="26" Width="154" SelectedDate="{Binding EndDate, Mode=OneWay}" IsEnabled="False"/>
         <Button x:Name="CloseButton" Content="Закрыть" HorizontalAlignment="Left" Margin="503,5,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="CloseButton_Click"/>
+        <Button x:Name="PaymentsButton" Content="Выплаты" HorizontalAlignment="Left" Margin="14,4,0,0" VerticalAlignment="Top" Width="76" FontSize="14" Height="40" Click="PaymentsButton_Click" IsEnabled="False"/>
     </Grid>
 </Window>

@@ -393,13 +393,20 @@ namespace Clients
 
             using(var db = new ClientsEntities())
             {
-                var client = db.GetClientById(Client.Id);
-                db.Client.Remove(client);
-                db.SaveChanges();
+                var credits = db.Account.Where(a => (a.DepositTypeID == 3 || a.DepositTypeID == 4) && a.ClientID == Client.Id && !a.IsClosed).ToList();
+                if (credits.Count == 0)
+                {
+                    var client = db.GetClientById(Client.Id);
+                    db.Client.Remove(client);
+                    db.SaveChanges();
+                    MessageBox.Show("Информация о клиенте успешно удалена!");
+                    ClearFields();
+                }
+                else
+                {
+                    MessageBox.Show("Клиент не может быть удалён, так как у него не погашен кредит!");
+                }
             }
-
-            MessageBox.Show("Информация о клиенте успешно удалена!");
-            ClearFields();
         }
     }
 }

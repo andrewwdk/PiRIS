@@ -74,10 +74,14 @@ namespace Clients
         {
             using(var db = new ClientsEntities())
             {
-                var mainAccounts = db.Account.Where(a => !a.IsClosed && a.PercentAccountID != null).ToList();
+                var mainAccounts = db.Account.Where(a => !a.IsClosed && a.PercentAccountID != null && (a.DepositTypeID == 1 || a.DepositTypeID == 2)).ToList();
                 IncrimentDaysCount(db, mainAccounts);
                 CalculatePercents(db, mainAccounts);
                 EndOfMonthPayments(db, mainAccounts.Where(a => a.DepositTypeID == 1).ToList());
+                EndOfTermPayments(db, mainAccounts);
+                mainAccounts = db.Account.Where(a => !a.IsClosed && a.PercentAccountID != null && (a.DepositTypeID == 3 || a.DepositTypeID == 4)).ToList();
+                IncrimentDaysCount(db, mainAccounts);
+                EndOfMonthPayments(db, mainAccounts);
                 EndOfTermPayments(db, mainAccounts);
             }
             Load();
@@ -110,10 +114,37 @@ namespace Clients
                 if (acc.DaysCount % 30 == 0)
                 {
                     var percentAccount = db.GetAccountById(acc.PercentAccountID.Value);
-                    acc.MoneyAmount += percentAccount.MoneyAmount;
-                    var bankResources = db.BankResourse.ToList();
-                    bankResources[0].RealMoney -= ConvertCurrencyToByn(acc.CurrencyID) * percentAccount.MoneyAmount;
-                    percentAccount.MoneyAmount = 0;
+                    if (acc.DepositTypeID == 1)
+                    {
+                        acc.MoneyAmount += percentAccount.MoneyAmount;
+                        var bankResources = db.BankResourse.ToList();
+                        bankResources[0].RealMoney -= ConvertCurrencyToByn(acc.CurrencyID) * percentAccount.MoneyAmount;
+                        percentAccount.MoneyAmount = 0;
+                    }
+                    
+                    if(acc.DepositTypeID == 3)
+                    {
+                        var daysCount = (acc.EndDate - acc.StartDate).Days + 1;
+                        var mainAmount = Convert.ToDouble(acc.MoneyAmount);
+                        var percents = mainAmount * db.GetDepositTypeById(acc.DepositTypeID).Percents / 100;
+                        var percentsByDay = Math.Round(percents / daysCount, 2);
+                        var mainAmountByDay = Math.Round(mainAmount / daysCount, 2);
+                        acc.MoneyAmount -= mainAmountByDay * 30;
+                        percentAccount.MoneyAmount -= percentsByDay * 30;
+                        var bankResources = db.BankResourse.ToList();
+                        bankResources[0].RealMoney += ConvertCurrencyToByn(acc.CurrencyID) * (percentsByDay + mainAmountByDay) * 30;
+                    }
+                    
+                    if(acc.DepositTypeID == 4)
+                    {
+                        var daysCount = (acc.EndDate - acc.StartDate).Days + 1;
+                        var mainAmount = Convert.ToDouble(acc.MoneyAmount);
+                        var percents = mainAmount * db.GetDepositTypeById(acc.DepositTypeID).Percents / 100;
+                        var percentsByDay = Math.Round(percents / daysCount, 2);
+                        percentAccount.MoneyAmount -= percentsByDay * 30;
+                        var bankResources = db.BankResourse.ToList();
+                        bankResources[0].RealMoney += ConvertCurrencyToByn(acc.CurrencyID) * percentsByDay * 30;
+                    }
                 }
             }
             db.SaveChanges();
@@ -128,9 +159,18 @@ namespace Clients
                     var percentAccount = db.GetAccountById(acc.PercentAccountID.Value);
                     percentAccount.IsClosed = true;
                     acc.IsClosed = true;
-                    acc.MoneyAmount += percentAccount.MoneyAmount;
-                    var bankResources = db.BankResourse.ToList();
-                    bankResources[0].RealMoney -= ConvertCurrencyToByn(acc.CurrencyID) * percentAccount.MoneyAmount;
+                    if (acc.DepositTypeID == 1 || acc.DepositTypeID == 2)
+                    {
+                        acc.MoneyAmount += percentAccount.MoneyAmount;
+                        var bankResources = db.BankResourse.ToList();
+                        bankResources[0].RealMoney -= ConvertCurrencyToByn(acc.CurrencyID) * percentAccount.MoneyAmount;
+                    }
+                    if (acc.DepositTypeID == 3 || acc.DepositTypeID == 4)
+                    {
+                        var bankResources = db.BankResourse.ToList();
+                        bankResources[0].RealMoney += ConvertCurrencyToByn(acc.CurrencyID) * (percentAccount.MoneyAmount + acc.MoneyAmount);
+                        acc.MoneyAmount = 0;
+                    }
                     percentAccount.MoneyAmount = 0;
                 }
             }
@@ -149,6 +189,12 @@ namespace Clients
         {
             var bankMoneyWindow = new BankMoneyWindow();
             bankMoneyWindow.Show();
+        }
+
+        private void ClientsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }

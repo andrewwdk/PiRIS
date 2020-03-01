@@ -91,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreditPaymentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +131,9 @@
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="ClientViewModel.cs" />
+    <Compile Include="CreditPaymentsWindow.xaml.cs">
+      <DependentUpon>CreditPaymentsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Currency.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
