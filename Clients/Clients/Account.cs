@@ -14,6 +14,12 @@ namespace Clients
     
     public partial class Account
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Account()
+        {
+            this.Card = new HashSet<Card>();
+        }
+    
         public int AccountID { get; set; }
         public int ClientID { get; set; }
         public int DepositTypeID { get; set; }
@@ -29,5 +35,7 @@ namespace Clients
         public virtual Client Client { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual DepositType DepositType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Card> Card { get; set; }
     }
 }

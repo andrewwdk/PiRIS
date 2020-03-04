@@ -2,9 +2,10 @@
 
 FD:\github\PiRIS\Clients\Clients\AccountInfoWindow.xaml;;
 FD:\github\PiRIS\Clients\Clients\AccountsWindow.xaml;;
+FD:\github\PiRIS\Clients\Clients\BankMoneyWindow.xaml;;
+FD:\github\PiRIS\Clients\Clients\CreditPaymentsWindow.xaml;;
 FD:\github\PiRIS\Clients\Clients\ListWindow.xaml;;
 FD:\github\PiRIS\Clients\Clients\MainWindow.xaml;;
 FD:\github\PiRIS\Clients\Clients\NewAccountWindow.xaml;;
-FD:\github\PiRIS\Clients\Clients\BankMoneyWindow.xaml;;
-FD:\github\PiRIS\Clients\Clients\CreditPaymentsWindow.xaml;;
+FD:\github\PiRIS\Clients\Clients\ATMWindow.xaml;;
 

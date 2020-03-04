@@ -196,5 +196,11 @@ namespace Clients
             var mainWindow = new MainWindow();
             mainWindow.Show();
         }
+
+        private void ATMButton_Click(object sender, RoutedEventArgs e)
+        {
+            var atmWindow = new ATMWindow();
+            atmWindow.Show();
+        }
     }
 }

@@ -159,6 +159,30 @@ namespace Clients
                         bankResources[0].PhysicalMoney += ConvertCurrencyToByn(mainAccount.CurrencyID) * mainAccount.MoneyAmount;
                     }
                     db.SaveChanges();
+                    if (mainAccount.DepositTypeID == 3 || mainAccount.DepositTypeID == 4)
+                    {
+                        var additionalAcc = new Account();
+                        part1 = _accountModel.AccountNumber.Substring(0, 9);
+                        part2 = GetCorrectAccountCountPart(Convert.ToInt32(_accountModel.AccountNumber.Substring(9, 3)) + 1);
+                        part3 = new Random().Next(0, 9);
+                        additionalAcc.AccountNumber = part1 + part2 + part3;
+                        additionalAcc.ClientID = mainAccount.ClientID;
+                        additionalAcc.CurrencyID = mainAccount.CurrencyID;
+                        additionalAcc.DaysCount = 0;
+                        additionalAcc.DepositTypeID = 1;
+                        additionalAcc.IsClosed = true;
+                        additionalAcc.StartDate = mainAccount.StartDate;
+                        additionalAcc.EndDate = mainAccount.EndDate;
+                        additionalAcc.MoneyAmount = mainAccount.MoneyAmount;
+                        db.Account.Add(additionalAcc);
+                        db.SaveChanges();
+                        var card = new Card();
+                        card.AccountID = db.GetAccountByAccountNumber(additionalAcc.AccountNumber).AccountID;
+                        card.Number = mainAccount.AccountNumber + new Random().Next(100, 999);
+                        card.PIN = new Random().Next(1000, 9999);
+                        db.Card.Add(card);
+                    }
+                    db.SaveChanges();
                     this.Close();
                 }
             }

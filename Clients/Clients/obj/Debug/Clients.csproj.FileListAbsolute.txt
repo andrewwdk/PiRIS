@@ -73,7 +73,6 @@ D:\projects\PiRIS\Clients\Clients\bin\Debug\ru\EntityFramework.SqlServer.resourc
 D:\projects\PiRIS\Clients\Clients\obj\Debug\Clients_Content.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\ListWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\ListWindow.baml
-D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.csprojAssemblyReference.cache
 D:\github\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.baml
 D:\projects\PiRIS\Clients\Clients\obj\Debug\AccountsWindow.g.cs
@@ -88,3 +87,6 @@ D:\github\PiRIS\Clients\Clients\obj\Debug\BankMoneyWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\BankMoneyWindow.baml
 D:\github\PiRIS\Clients\Clients\obj\Debug\CreditPaymentsWindow.g.cs
 D:\github\PiRIS\Clients\Clients\obj\Debug\CreditPaymentsWindow.baml
+D:\github\PiRIS\Clients\Clients\obj\Debug\Clients.csprojAssemblyReference.cache
+D:\github\PiRIS\Clients\Clients\obj\Debug\ATMWindow.g.cs
+D:\github\PiRIS\Clients\Clients\obj\Debug\ATMWindow.baml

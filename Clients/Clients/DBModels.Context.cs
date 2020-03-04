@@ -28,6 +28,7 @@ namespace Clients
     
         public virtual DbSet<Account> Account { get; set; }
         public virtual DbSet<BankResourse> BankResourse { get; set; }
+        public virtual DbSet<Card> Card { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Currency> Currency { get; set; }
@@ -233,6 +234,19 @@ namespace Clients
         public int GetUserAccountsCountById(int id)
         {
             return Account.Where(acc => acc.ClientID == id).ToList().Count();
+        }
+
+        public Card GetCardByNumber(string number)
+        {
+            foreach(var card in Card)
+            {
+                if(card.Number == number)
+                {
+                    return card;
+                }
+            }
+
+            return null;
         }
     }
 }
